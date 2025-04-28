@@ -29,6 +29,33 @@ s consists only of printable ASCII characters.
 
 
 
+ class Solution {
+    public boolean isPalindrome(String s) {
+        int i=0;
+        int j=s.length()-1;
+
+        while (i<j) {
+            if (!isAlfaNumber(s.charAt(i))) {
+                i++;
+            } else if (!isAlfaNumber(s.charAt(j))) {
+                j--;
+            } else {
+                if (Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) {
+                    return false;
+                }
+                i++;
+                j--;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isAlfaNumber(char ch) {
+        return ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch<= 'z') || (ch >= '0' && ch <= '9'));
+    }
+}
+
+
 
 class Solution {
     public boolean isPalindrome(String s) {
