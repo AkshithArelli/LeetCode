@@ -27,21 +27,19 @@ Constraints:
 
 class Solution {
     public int maxProfit(int[] prices) {
-      //T:O(n), S:O(1)
-        int price = prices[0];
-        int currentProfit = 0;
+        //T:O(n),S:O(1)
+        int minPrice = prices[0];
         int maxProfit = 0;
-
-        for (int i=1; i<prices.length; i++){
-            if(prices[i] < price) {
-                price = prices[i];
+        for (int i=1; i<prices.length; i++) {
+            int currentPrice = prices[i];
+            if (currentPrice < minPrice) {
+                minPrice = currentPrice;
             } else {
-                currentProfit = prices[i] - price;
-                maxProfit = Math.max(currentProfit, maxProfit);
+                int currentProfit = currentPrice - minPrice;
+                maxProfit = Math.max(currentProfit,maxProfit);
             }
         }
-
         return maxProfit;
     }
-        
 }
+
