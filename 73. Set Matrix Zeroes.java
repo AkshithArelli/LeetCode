@@ -21,6 +21,32 @@ class Solution {
     public void setZeroes(int[][] matrix) {
 
 
+     
+
+        //little bit time optimised but still not space optimised
+        //T:O(m*n) , S:O(m+n)
+        //look diagrams of YT video
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean[] rowsArray = new boolean[m];
+        boolean[] colsArray = new boolean[n];
+
+        for (int i=0; i<m; i++) {
+            for (int j=0; j<n; j++) {
+                if (matrix[i][j] == 0) {
+                    rowsArray[i] = true;
+                    colsArray[j] = true;
+                }
+            }
+        }
+
+        for (int i=0; i<m; i++) {
+            for (int j=0; j<n; j++) {
+                if (rowsArray[i] || colsArray[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
 
 
 
