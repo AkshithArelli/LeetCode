@@ -64,6 +64,7 @@ class Solution {
                     if (index == k) {
                         break;
                     }
+                 //lets say answer is not unique like in the eg we have taken, in that case index increases and becomes greater than k in inner loop and then out of bounds exception can occur
                 }
             }
         }
