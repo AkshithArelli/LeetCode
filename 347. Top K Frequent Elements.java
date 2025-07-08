@@ -44,6 +44,9 @@ class Solution {
         //index:     0, 1  , 2,  3
         //ie in each bucket we store the actual keys and indexes represents count
         List<Integer>[] buckets = new List[nums.length +1];
+       //here we used new List[num] instead of new int[num] because
+     //new int[5] : [0,0,0,0,0] initializes array with single elements only
+     //new List[5] : [null,null,null,null,null] initializes array with null so we can store list of numbers at each place
         for (int key : freqMap.keySet()) {    //{1,2,3,4} //key set
             int frequency = freqMap.get(key); //gives value ie for key value is 3
             if (buckets[frequency] == null) {
