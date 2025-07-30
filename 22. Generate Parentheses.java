@@ -142,9 +142,22 @@ Invalid paths like ")(" or "(()))" are never generated because we never allow cl
 Tree shows all valid recursive paths, pruned automatically by the condition open < close.
 
 
+ ----
 
----
+Time complexity:
 
-Would you like the same for n = 3 or a visual Java program to print this tree?
+We can place 2n characters (n '(' and n ')').
 
- 
+For each character position, there are at most 2 choices — '(' or ')'.
+
+So naive upper bound = 2^2n combinations.
+
+
+But we don't generate all combinations — only the valid ones.
+
+
+Space complexity:
+
+Each valid string has 2n characters → the depth of recursion is at most 2n.
+
+So, stack space used = O(2n) in the worst case.
