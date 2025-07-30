@@ -43,4 +43,108 @@ class Solution {
 
 //https://www.youtube.com/watch?v=NHw8ycom-f8&t=134s (from 9:00)
 
+Awesome! Let’s walk through both the tree visualization and a dry run of the Java version of generateParenthesis(n) when n = 2.
 
+
+---
+
+🌳 Tree Visualization for n = 2 (i.e., 2 open and 2 close)
+
+We start with:
+
+open = 2, close = 2, curr = ""
+
+We'll use the following logic:
+
+If open > 0 → add '('
+
+If close > open → add ')'
+
+
+
+---
+
+📘 Tree
+
+"" (2,2)
+                         /        \
+                "(" (1,2)          -- [open-1]
+                   /     \     
+        "((" (0,2)        "()" (1,1)
+          |                |       \
+       "(()" (0,1)       "(()"     "()(" (0,1)
+          |                |         |
+       "(())" (0,0)     Not valid   "()()" (0,0)
+
+
+---
+
+✅ Dry Run:
+
+We start with generate(2, 2, "")
+
+
+---
+
+Call 1: (2,2,"")
+→ open > 0 → Call (1,2,"(")
+
+
+---
+
+Call 2: (1,2,"(")
+→ open > 0 → Call (0,2,"((")
+
+
+---
+
+Call 3: (0,2,"((")
+→ close > open → Call (0,1,"(()")
+
+
+---
+
+Call 4: (0,1,"(()")
+→ close > open → Call (0,0,"(())") ✅ add to result
+
+
+---
+
+Backtrack to Call 2: (1,2,"(")
+→ close > open → Call (1,1,"()")
+
+
+---
+
+Call 5: (1,1,"()")
+→ open > 0 → Call (0,1,"()(")
+
+
+---
+
+Call 6: (0,1,"()(")
+→ close > open → Call (0,0,"()()") ✅ add to result
+
+
+---
+
+✅ Final Result:
+
+["(())", "()()"]
+
+
+---
+
+💡 Notes:
+
+Invalid paths like ")(" or "(()))" are never generated because we never allow close < open.
+
+Tree shows all valid recursive paths, pruned automatically by the condition open < close.
+
+
+
+---
+
+Would you like the same for n = 3 or a visual Java program to print this tree?
+
+ 
