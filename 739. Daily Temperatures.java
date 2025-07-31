@@ -1,0 +1,99 @@
+Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+
+ 
+
+Example 1:
+
+Input: temperatures = [73,74,75,71,69,72,76,73]
+Output: [1,1,4,2,1,1,0,0]
+Example 2:
+
+Input: temperatures = [30,40,50,60]
+Output: [1,1,1,0]
+Example 3:
+
+Input: temperatures = [30,60,90]
+Output: [1,1,0]
+ 
+
+Constraints:
+
+1 <= temperatures.length <= 105
+30 <= temperatures[i] <= 100
+
+
+Solution:
+
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        //T:O(n) , S:O(n)
+        int n = temperatures.length;
+        int[] result = new int[n];
+        //position stack to store the position of elements
+        Stack<Integer> positionStack = new Stack<>();
+        //travese from reverse
+        for (int i=n-1; i>=0; i--) {
+            //popping all indices with a lower or equal temps than the current one 
+            while (!positionStack.isEmpty() 
+                && temperatures[i] >= temperatures[positionStack.peek()]) {
+                positionStack.pop();
+            
+            }
+            //If the stack still has elements then the next warmer temp exists
+            if (!positionStack.isEmpty()) {
+                result[i] = positionStack.peek() - i;
+            }
+            positionStack.push(i);
+        }
+        return result;
+        //even if we do not add any value (last value or if continuously last values are decreasin order, we will not be adding anything and the default values will be 0 over there as we are not adding any element)
+
+
+      
+        //same code but expanded in detail
+        // int n = temperatures.length;
+        // int[] result = new int[n];
+        // Stack<Integer> positionStack = new Stack<>();
+        // result[n-1] = 0;
+        // positionStack.push(n-1);
+        // for (int i=n-2; i>=0; i--) {
+        //     int position = positionStack.peek();
+        //     if (temperatures[i] < temperatures[position]) {
+        //         result[i] = position - i;
+        //         positionStack.push(i);
+        //     } 
+        //     while (!positionStack.isEmpty() && temperatures[i] >= temperatures[position]) {
+        //         positionStack.pop();
+        //         if (!positionStack.isEmpty()) {
+        //             position = positionStack.peek();
+        //         }
+        //     }
+        //     if (!positionStack.isEmpty()) {
+        //         result[i] = position - i;
+        //     } else {
+        //         result[i] = 0;
+        //     }
+        //     positionStack.push(i);
+        // }
+        // return result;
+
+        // bruteforce, but can fail when input length is large
+        // T:O(n^2), S:O(n)
+        // int n = temperatures.length;
+        // int[] result = new int[n];
+        // for (int i=0; i<n-1; i++) {
+        //     int count =1;
+        //     for (int j=i+1; j<n; j++) {
+        //         if (temperatures[i] < temperatures[j]) {
+        //             result[i] = count;
+        //             break;
+        //         }
+        //         count++;
+        //     }
+        // }
+        // result[n-1] = 0;
+        // return result;
+    }
+}
+
+  
