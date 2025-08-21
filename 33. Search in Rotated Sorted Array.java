@@ -1,0 +1,89 @@
+There is an integer array nums sorted in ascending order (with distinct values).
+
+Prior to being passed to your function, nums is possibly left rotated at an unknown index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be left rotated by 3 indices and become [4,5,6,7,0,1,2].
+
+Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+ 
+
+Example 1:
+
+Input: nums = [4,5,6,7,0,1,2], target = 0
+Output: 4
+Example 2:
+
+Input: nums = [4,5,6,7,0,1,2], target = 3
+Output: -1
+Example 3:
+
+Input: nums = [1], target = 0
+Output: -1
+ 
+
+Constraints:
+
+1 <= nums.length <= 5000
+-104 <= nums[i] <= 104
+All values of nums are unique.
+nums is an ascending array that is possibly rotated.
+-104 <= target <= 104
+
+
+Solution:
+
+class Solution {
+    public int search(int[] nums, int target) {
+        //intution
+        //8,9,10,11,0,1,2,3,4,5,6,7
+        //lets say our target is 8 
+        //and we divide the array into two halves using bs
+        //then we have two arrays
+        //8,9,10,11,0,1   and 2,3,4,5,6,7
+        //** if we observe when we divide a rotated array
+        //we always will have one sorted array and other rotated array
+        //if our target is in sorted array eg: target 7, we apply bs over
+        //the sorted array, else if out target is in rotated array we again
+        //divide it into two halves and at some point it will in sorted array */
+        //target 8 - 8,9,10,11,0,1(divide) and 2,3,4,5,6,7(discard this)
+        //8,9,10(divide) and 11,0,1 (discard)
+        //8(use this) and 9,10(discard)
+        //8 -> return the index
+
+        //eg: 
+        //8,9,10,11,0,1,2,3,4,5,6,7 -> target: 9
+        //3,4,5,6,7,8,9,10,11,0,1,2 -> target: 4
+        //T:O(logn) , S:O(1)
+        
+        int low = 0;
+        int high = nums.length-1;
+
+        while (low <= high) {
+            int mid = low + (high-low)/2;
+
+            if (nums[mid] == target) {
+                return mid;
+            }
+
+            //left half is sorted
+            if (nums[low] <= nums[mid]) {
+                if (nums[low] <= target && target < nums[mid]) {
+                    high = mid-1;  //target in left half
+                } else {
+                    low = mid+1;   //target in right half
+                }
+            }
+            //right half is sorted
+            else {
+                if (nums[mid] < target && target <= nums[high]) {
+                    low = mid+1;   //target in right half
+                } else {
+                    high = mid-1;  //target in left half
+                }
+            }
+        }
+        return -1;
+
+    }
+}
