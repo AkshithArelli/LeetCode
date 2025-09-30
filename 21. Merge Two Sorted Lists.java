@@ -46,9 +46,8 @@ class Solution {
 
         while (list1 != null && list2 != null) {
             if (list1.val < list2.val) {
-                headNode.next = list1; //here we attach linkedlist
-                list1 = list1.next; //here we are moving the pointer forward, so
-                //only one node is now assigned to headNode.next
+                headNode.next = list1;
+                list1 = list1.next;
             } else {
                 headNode.next = list2; 
                 list2 = list2.next;
@@ -57,8 +56,7 @@ class Solution {
         }
 
         if (list1 != null) {
-            headNode.next = list1; //here as we are not moving forward
-            //entire linkedlist is attached now
+            headNode.next = list1;
         }
         if (list2 != null) {
             headNode.next = list2;
