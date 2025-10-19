@@ -37,7 +37,7 @@ The number of nodes in the tree is in the range [0, 104].
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-      //T:O(n), S:O(1)
+      //T:O(n), S:O(h)
         if (root == null) return 0;
         int leftHeight = maxDepth(root.left);
         int rightHeight = maxDepth(root.right);
