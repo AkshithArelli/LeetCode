@@ -27,6 +27,22 @@ Constraints:
 
 class Solution {
     public int longestConsecutive(int[] nums) {
+     /*
+        Intuition
+
+        We want consecutive numbers — like a chain.
+
+        So for each number, we ask:
+
+        “Is this the start of a sequence?”
+
+        If num - 1 does not exist in the array, then num must be the start of a sequence.
+
+        Then we count how long that sequence goes (num + 1, num + 2, …).
+
+        We use a HashSet to check existence in O(1) time.
+        */
+     
         //using hashset for O(n)
         //T:O(n) even though there is a inner loop, 
         //in worst case scenarion [10,20,30] the inner loop does run as there is no num+1 at any given time
