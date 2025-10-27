@@ -27,17 +27,22 @@ Constraints:
 
 class Solution {
     public int maxProfit(int[] prices) {
-        //T:O(n),S:O(1)
-        int minPrice = prices[0];
+        /*
+        Walk through the prices once, keeping:
+		the lowest price seen so far (minPrice), and
+		the maximum profit found so far (maxProfit).
+        */
+        //T:O(n) , S:O(1)
+        int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
-        for (int i=1; i<prices.length; i++) {
-            int currentPrice = prices[i];
-            if (currentPrice < minPrice) {
-                minPrice = currentPrice;
-            } else {
-                int currentProfit = currentPrice - minPrice;
-                maxProfit = Math.max(currentProfit,maxProfit);
-            }
+
+        for (int price : prices) {
+            //update the min price so far
+            if (price < minPrice) minPrice = price;
+            //compute profit if we sold today
+            int profit = price - minPrice;
+            //update maxProfit
+            maxProfit = Math.max(profit,maxProfit);
         }
         return maxProfit;
     }
