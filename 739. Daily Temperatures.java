@@ -26,6 +26,28 @@ Solution:
 
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
+
+      /*
+        We use a stack that keeps indices
+        Whenever we find a warmer day, we pop from stack and calculate the difference in indices.
+        */
+        //T:O(n), S:O(n)
+        int length = temperatures.length;
+        int[] result = new int[length];
+        Stack<Integer> stack = new Stack<>(); // stores indices
+
+        for (int i=0; i<length; i++) {
+            // while current temperature > temperature at top of stack
+            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                int prevIndex = stack.pop();
+                result[prevIndex] = i - prevIndex; //number of days waited
+            }
+
+            stack.push(i);
+        }
+        return result;
+ 
+     
         //T:O(n) , S:O(n)
         int n = temperatures.length;
         int[] result = new int[n];
