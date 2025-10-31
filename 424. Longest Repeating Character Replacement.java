@@ -28,6 +28,15 @@ s consists of only uppercase English letters.
 
 class Solution {
     public int characterReplacement(String s, int k) {
+     //window_size - maxFreq <= k
+        //T:O(n),S:O(1)
+        /*
+        At each step:
+	    •	We count frequency of each character in the window.
+	    •	Find the max frequency character in the current window (say maxFreq).
+	    •	If the number of characters to replace (window size - maxFreq)
+        k, we shrink the window from the left.
+        */
         //T:O(n) , S:O(1)
         int freq[] = new int[26];
         int left = 0;
