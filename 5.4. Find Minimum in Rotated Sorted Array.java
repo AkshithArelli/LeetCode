@@ -9,7 +9,7 @@ Given the sorted rotated array nums of unique elements, return the minimum eleme
 You must write an algorithm that runs in O(log n) time.
 
  
-
+```
 Example 1:
 
 Input: nums = [3,4,5,1,2]
@@ -34,8 +34,8 @@ n == nums.length
 -5000 <= nums[i] <= 5000
 All the integers of nums are unique.
 nums is sorted and rotated between 1 and n times.
-
-
+```
+```java
 Solution:
 
   class Solution {
@@ -68,3 +68,4 @@ Solution:
         //cheatSheet:
         //want minValue: (low<high) ; high=mid; low=mid+1
         //want maxValue: (low<=high) ; low=mid+1; high=mid-1
+```
