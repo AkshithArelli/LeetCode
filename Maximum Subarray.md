@@ -1,7 +1,7 @@
 Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
  
-
+```
 Example 1:
 
 Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
@@ -26,8 +26,8 @@ Constraints:
  
 
 Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
-
-
+```
+```java
 class Solution {
     public int maxSubArray(int[] nums) {
         //Kadane's Algorithm
@@ -56,3 +56,4 @@ class Solution {
         return maxSum;
     }
 }
+```
